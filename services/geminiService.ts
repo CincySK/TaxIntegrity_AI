@@ -1,12 +1,28 @@
 // services/geminiService.ts
+// This now talks ONLY to the Cloudflare RAG worker (ChatGPT powered)
 
-export async function sendMessageToGemini(message: string): Promise<any> {
+export interface RAGResponse {
+  text: string;
+  citations?: {
+    tag: string;
+    source: string;
+    page: number | null;
+    score: number;
+  }[];
+  retrieved?: number;
+}
+
+export async function sendMessageToGemini(
+  message: string
+): Promise<RAGResponse> {
   const WORKER_URL =
     "https://taxintegrity-chat-worker.samanyu-karanam.workers.dev/";
 
   const response = await fetch(WORKER_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({ message }),
   });
 
@@ -15,5 +31,5 @@ export async function sendMessageToGemini(message: string): Promise<any> {
     throw new Error(`Worker error ${response.status}: ${text}`);
   }
 
-  return await response.json();
+  return response.json();
 }
