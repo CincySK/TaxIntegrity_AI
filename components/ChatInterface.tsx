@@ -3,7 +3,6 @@ import { Send, Bot, User, Sparkles, Cpu } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { ChatMessage } from '../types';
 import { createChatSession, sendMessageToGemini } from '../services/geminiService';
-import type { Chat } from '@google/genai';
 
 const ChatInterface = () => {
     const [messages, setMessages] = useState<ChatMessage[]>([
