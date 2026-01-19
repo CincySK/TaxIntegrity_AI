@@ -1,5 +1,4 @@
-const API_URL = "https://tax-integrity-chat.samanyu-karanam.workers.dev/";
-
+const WORKER_URL = "https://taxintegrity-chat-worker.samanyu-karanam.workers.dev/";
 export function createChatSession() {
   // keep compatibility with your UI (not used anymore)
   return {};
